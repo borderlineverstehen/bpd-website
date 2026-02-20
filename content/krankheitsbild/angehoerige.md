@@ -5,7 +5,7 @@ description: Wie du nahestehende Menschen mit BPD unterstützen kannst — ohne
 chip: Angehörige
 weight: 3
 ---
-## Eine Beziehung, die fordert oder?
+## Eine Beziehung, die fordert
 
 Jemanden zu lieben, der mit BPD lebt, kann bedeuten: intensive Nähe und plötzliche Distanz, tiefe Verbundenheit und unerwartete Konflikte, das Gefühl nie genug zu tun und gleichzeitig zu viel zu sein.
 
