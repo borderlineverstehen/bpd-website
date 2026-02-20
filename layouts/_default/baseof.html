@@ -25,11 +25,9 @@
   {{ block "head" . }}{{ end }}
 
   <!-- Umami Analytics (self-hosted, DSGVO-konform, kein Cookie-Banner) -->
-  {{- if not .Site.IsServer }}
   {{- with .Site.Params.umamiSrc }}
-  <script defer src="{{ . }}" data-website-id="{{ $.Site.Params.umamiId }}"></script>
-  {{- end }}
-  {{- end }}
+<script defer src="{{ . }}" data-website-id="{{ $.Site.Params.umamiId }}"></script>
+{{- end }}
 
   <!-- Netlify Identity fuer Decap CMS -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
