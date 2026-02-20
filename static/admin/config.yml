@@ -22,25 +22,28 @@ collections:
       - { label: Reihenfolge,  name: weight,       widget: number,  required: false }
       - { label: Inhalt,       name: body,         widget: markdown }
 
-  - name: ressourcen
-    label: Ressourcen
-    file: data/ressourcen.yaml
-    fields:
-      - label: Ressourcen
-        name: ressourcen
-        widget: list
+  - name: daten
+    label: Daten
+    files:
+      - name: ressourcen
+        label: Ressourcen
+        file: data/ressourcen.yaml
         fields:
-          - { label: Name,         name: name,        widget: string }
-          - label: Kategorie
-            name: kategorie
-            widget: select
-            options:
-              - { label: "Soforthilfe & Krisen", value: krise }
-              - { label: Beratung,               value: beratung }
-              - { label: Therapiesuche,          value: therapie }
-              - { label: Selbsthilfe,            value: selbsthilfe }
-              - { label: Information,            value: information }
-          - { label: Beschreibung, name: beschreibung, widget: string }
-          - { label: Kontakt,      name: kontakt,      widget: string,  required: false }
-          - { label: Website,      name: url,           widget: string,  required: false }
-          - { label: Kostenlos,    name: kostenlos,     widget: boolean, default: true }
+          - label: Ressourcen
+            name: ressourcen
+            widget: list
+            fields:
+              - { label: Name,         name: name,        widget: string }
+              - label: Kategorie
+                name: kategorie
+                widget: select
+                options:
+                  - { label: "Soforthilfe & Krisen", value: krise }
+                  - { label: Beratung,               value: beratung }
+                  - { label: Therapiesuche,          value: therapie }
+                  - { label: Selbsthilfe,            value: selbsthilfe }
+                  - { label: Information,            value: information }
+              - { label: Beschreibung, name: beschreibung, widget: string }
+              - { label: Kontakt,      name: kontakt,      widget: string,  required: false }
+              - { label: Website,      name: url,          widget: string,  required: false }
+              - { label: Kostenlos,    name: kostenlos,    widget: boolean, default: true }
