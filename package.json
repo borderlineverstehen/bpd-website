@@ -1,0 +1,16 @@
+{
+  "name": "bpd-verstehen",
+  "version": "1.0.0",
+  "description": "BPD Informationswebsite",
+  "scripts": {
+    "dev": "hugo server --disableFastRender",
+    "build": "hugo --minify",
+    "tw:watch": "npx tailwindcss -i ./assets/css/main.css -o ./static/css/compiled.css --watch",
+    "tw:build": "npx tailwindcss -i ./assets/css/main.css -o ./static/css/compiled.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0"
+  }
+}

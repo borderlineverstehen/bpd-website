@@ -1,0 +1,52 @@
+<footer class="bg-stone-900 text-stone-300 mt-24">
+  <div class="container-lg section-pad py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+      <!-- Über das Projekt -->
+      <div>
+        <p class="font-serif text-white text-lg mb-3">BPD Verstehen</p>
+        <p class="text-sm leading-relaxed text-stone-400">
+          Eine gemeinnützige Informationsplattform über Borderline-Persönlichkeitsstörung.
+          Hier findest du fundierte Infos, Ressourcen und Gemeinschaft — kein medizinischer Rat.
+        </p>
+      </div>
+
+      <!-- Schnelllinks -->
+      <div>
+        <p class="text-white font-medium mb-3 text-sm uppercase tracking-wider">Seiten</p>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/krankheitsbild/" class="hover:text-teal-400 transition-colors">Krankheitsbild</a></li>
+          <li><a href="/ressourcen/"    class="hover:text-teal-400 transition-colors">Ressourcen</a></li>
+          <li><a href="/community/"     class="hover:text-teal-400 transition-colors">Community</a></li>
+          <li><a href="/ueber-uns/"     class="hover:text-teal-400 transition-colors">Über uns</a></li>
+        </ul>
+      </div>
+
+      <!-- Rechtliches -->
+      <div>
+        <p class="text-white font-medium mb-3 text-sm uppercase tracking-wider">Rechtliches</p>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/impressum/"     class="hover:text-teal-400 transition-colors">Impressum</a></li>
+          <li><a href="/datenschutz/"   class="hover:text-teal-400 transition-colors">Datenschutz</a></li>
+          <li><a href="/barrierefreiheit/" class="hover:text-teal-400 transition-colors">Barrierefreiheit</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Krisenlinie wiederholen -->
+    <div class="mt-10 pt-6 border-t border-stone-700 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
+      <p class="text-stone-500">
+        © {{ now.Format "2006" }} BPD Verstehen · Kein Ersatz für professionelle Hilfe
+      </p>
+      <a href="tel:08001110111"
+         class="inline-flex items-center gap-2 text-amber-400 font-medium hover:text-amber-300 transition-colors">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        Telefonseelsorge 0800 111 0 111
+      </a>
+    </div>
+
+  </div>
+</footer>

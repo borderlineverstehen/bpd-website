@@ -1,0 +1,45 @@
+baseURL = "https://bpd-verstehen.de/"
+languageCode = "de-DE"
+title = "BPD Verstehen"
+
+[params]
+  description = "Informationen, Ressourcen und Gemeinschaft rund um Borderline-Persönlichkeitsstörung"
+  author = "BPD Verstehen"
+  email = "borderline-verstehen@gmail.com"
+  # Umami Analytics — nach Setup eintragen:
+  # umamiSrc = "https://deine-umami-url.netlify.app/script.js"
+  # umamiId  = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[menu]
+  [[menu.main]]
+    name = "Startseite"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Krankheitsbild"
+    url = "/krankheitsbild/"
+    weight = 2
+  [[menu.main]]
+    name = "Ressourcen"
+    url = "/ressourcen/"
+    weight = 3
+  [[menu.main]]
+    name = "Community"
+    url = "/community/"
+    weight = 4
+
+[outputs]
+  home = ["HTML", "RSS"]
+
+[build]
+  writeStats = true
+
+[module]
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
+  <title>{{ if .IsHome }}{{ .Site.Title }} — Informationen & Ressourcen{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
+
+  <!-- Preconnect für Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Compiled CSS (Tailwind + Custom) -->
+  <link rel="stylesheet" href="/css/compiled.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="{{ .Title }}" />
+  <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:locale"      content="de_DE" />
+
+  {{ block "head" . }}{{ end }}
+
+  <!-- Umami Analytics (self-hosted, DSGVO-konform, kein Cookie-Banner) -->
+  {{- if not .Site.IsServer }}
+  {{- with .Site.Params.umamiSrc }}
+  <script defer src="{{ . }}" data-website-id="{{ $.Site.Params.umamiId }}"></script>
+  {{- end }}
+  {{- end }}
+
+  <!-- Netlify Identity fuer Decap CMS -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Krisen-Schnellzugriff -->
+  <div class="crisis-bar" role="banner">
+    In einer Krise? →&nbsp;
+    <a href="tel:0800111 0 111" class="font-semibold text-amber-800 underline underline-offset-2">
+      Telefonseelsorge 0800 111 0 111
+    </a>
+    &nbsp;(kostenlos, 24/7)
+  </div>
+
+  <!-- Navigation -->
+  {{ partial "nav.html" . }}
+
+  <!-- Hauptinhalt -->
+  <main id="main-content" class="flex-1">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  <!-- Footer -->
+  {{ partial "footer.html" . }}
+
+  <!-- Minimal JS -->
+  <script src="/js/main.js" defer></script>
+</body>
+</html>

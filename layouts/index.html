@@ -1,0 +1,121 @@
+{{ define "main" }}
+
+<!-- ── HERO ──────────────────────────────────────────── -->
+<section class="section-pad pt-24 pb-20 bg-gradient-to-b from-teal-50/60 to-stone-50">
+  <div class="container-md text-center">
+
+    <span class="chip animate-fade-up">Kostenlos · Gemeinnützig · Unabhängig</span>
+
+    <h1 class="mt-6 text-5xl sm:text-6xl font-serif text-stone-900 text-balance animate-fade-up delay-1">
+      Borderline verstehen.<br/>
+      <em class="text-teal-600 not-italic">Nicht allein sein.</em>
+    </h1>
+
+    <p class="mt-6 text-lg text-stone-600 max-w-xl mx-auto text-balance animate-fade-up delay-2">
+      Fundierte Informationen zur Borderline-Persönlichkeitsstörung —
+      für Betroffene, Angehörige und alle, die mehr verstehen wollen.
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-3 justify-center animate-fade-up delay-3">
+      <a href="/krankheitsbild/" class="btn-primary">
+        Krankheitsbild erkunden
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="/ressourcen/" class="btn-secondary">Hilfe & Ressourcen</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── THEMEN-CARDS ───────────────────────────────────── -->
+<section class="section-pad" aria-labelledby="themen-heading">
+  <div class="container-lg">
+    <h2 id="themen-heading" class="text-3xl font-serif text-stone-900 mb-2">Themen</h2>
+    <p class="text-stone-500 mb-10 text-sm">Was möchtest du heute erkunden?</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <!-- Card: Was ist BPD? -->
+      <a href="/krankheitsbild/" class="card group" aria-label="Was ist BPD?">
+        <div class="w-10 h-10 rounded-2xl bg-teal-100 flex items-center justify-center mb-4 group-hover:bg-teal-200 transition-colors">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>
+          </svg>
+        </div>
+        <h3 class="font-serif text-xl text-stone-900 mb-2">Was ist BPD?</h3>
+        <p class="text-stone-500 text-sm">Symptome, Diagnosekriterien, Entstehung und was Borderline wirklich bedeutet.</p>
+      </a>
+
+      <!-- Card: Therapie & Behandlung -->
+      <a href="/krankheitsbild/therapie/" class="card group" aria-label="Therapie & Behandlung">
+        <div class="w-10 h-10 rounded-2xl bg-amber-100 flex items-center justify-center mb-4 group-hover:bg-amber-200 transition-colors">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h3 class="font-serif text-xl text-stone-900 mb-2">Therapie & Behandlung</h3>
+        <p class="text-stone-500 text-sm">DBT, Schematherapie, MBT — welche Ansätze es gibt und wie sie wirken.</p>
+      </a>
+
+      <!-- Card: Ressourcen -->
+      <a href="/ressourcen/" class="card group" aria-label="Ressourcen & Anlaufstellen">
+        <div class="w-10 h-10 rounded-2xl bg-violet-100 flex items-center justify-center mb-4 group-hover:bg-violet-200 transition-colors">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2" aria-hidden="true">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <h3 class="font-serif text-xl text-stone-900 mb-2">Ressourcen</h3>
+        <p class="text-stone-500 text-sm">Notfallnummern, Beratungsstellen, Therapiesuche und weiterführende Links.</p>
+      </a>
+
+      <!-- Card: Für Angehörige -->
+      <a href="/krankheitsbild/angehoerige/" class="card group" aria-label="Für Angehörige">
+        <div class="w-10 h-10 rounded-2xl bg-rose-100 flex items-center justify-center mb-4 group-hover:bg-rose-200 transition-colors">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e11d48" stroke-width="2" aria-hidden="true">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </div>
+        <h3 class="font-serif text-xl text-stone-900 mb-2">Für Angehörige</h3>
+        <p class="text-stone-500 text-sm">Wie du nahestehende Menschen unterstützen kannst — ohne dich selbst zu verlieren.</p>
+      </a>
+
+      <!-- Card: Stigma & Gesellschaft -->
+      <a href="/krankheitsbild/stigma/" class="card group" aria-label="Stigma & Gesellschaft">
+        <div class="w-10 h-10 rounded-2xl bg-sky-100 flex items-center justify-center mb-4 group-hover:bg-sky-200 transition-colors">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/>
+          </svg>
+        </div>
+        <h3 class="font-serif text-xl text-stone-900 mb-2">Stigma & Gesellschaft</h3>
+        <p class="text-stone-500 text-sm">Missverständnisse aufklären, Sprache bewusst einsetzen, Entstigmatisierung fördern.</p>
+      </a>
+
+      <!-- Card: Community -->
+      <a href="/community/" class="card-accent group" aria-label="Community beitreten">
+        <div class="w-10 h-10 rounded-2xl bg-white/20 flex items-center justify-center mb-4">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" aria-hidden="true">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </div>
+        <h3 class="font-serif text-xl text-white mb-2">Community</h3>
+        <p class="text-teal-100 text-sm">Austausch mit anderen Betroffenen und Angehörigen — offen, sicher, respektvoll.</p>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── DISCLAIMER ─────────────────────────────────────── -->
+<section class="section-pad pt-0">
+  <div class="container-md">
+    <div class="bg-stone-100 rounded-3xl p-6 text-sm text-stone-600 border border-stone-200">
+      <strong class="text-stone-800">Hinweis:</strong>
+      Diese Website stellt keine medizinische oder psychotherapeutische Beratung dar.
+      Bei akuten Krisen wende dich bitte an die
+      <a href="tel:08001110111" class="text-teal-700 font-medium">Telefonseelsorge (0800 111 0 111)</a>
+      oder deinen behandelnden Arzt.
+    </div>
+  </div>
+</section>
+
+{{ end }}

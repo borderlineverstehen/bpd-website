@@ -1,0 +1,35 @@
+# Ressourcen-Daten — bearbeitbar ohne Code-Kenntnisse
+# Kategorien: krise, beratung, therapie, information, selbsthilfe
+
+ressourcen:
+
+  - name: "Telefonseelsorge"
+    kategorie: krise
+    beschreibung: "Kostenlos, anonym, rund um die Uhr erreichbar."
+    kontakt: "0800 111 0 111 oder 0800 111 0 222"
+    url: "https://www.telefonseelsorge.de"
+    kostenlos: true
+
+  - name: "Krisentelefon für Männer"
+    kategorie: krise
+    beschreibung: "Speziell für Männer in psychischen Krisen."
+    kontakt: "0800 111 0 300"
+    kostenlos: true
+
+  - name: "BPD Selbsthilfe Deutschland"
+    kategorie: selbsthilfe
+    beschreibung: "Netzwerk von Selbsthilfegruppen für BPD-Betroffene und Angehörige."
+    url: "https://www.bpd-selbsthilfe.de"
+    kostenlos: true
+
+  - name: "Therapeutensuche (Kassenärztliche Bundesvereinigung)"
+    kategorie: therapie
+    beschreibung: "Offizielle Therapeuten-Datenbank mit Filterfunktion nach Therapieform."
+    url: "https://www.kvb.de/patienten/arzt-und-psychotherapeutensuche/"
+    kostenlos: true
+
+  - name: "AWMF Leitlinie BPS"
+    kategorie: information
+    beschreibung: "Aktuelle wissenschaftliche Leitlinie zur Behandlung der BPS (Fachpublikum)."
+    url: "https://www.awmf.org/leitlinien/detail/ll/038-015.html"
+    kostenlos: true
