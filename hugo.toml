@@ -7,9 +7,9 @@ title = "BPD Verstehen"
   author = "BPD Verstehen"
   email = "borderline-verstehen@gmail.com"
   # Umami Analytics — nach Setup eintragen:
-  # umamiSrc = "https://umami-6nu6gawdd-borderlineverstehens-projects.vercel.app/websites/0bf7577d-e000-4c38-ac4e-5a481d4bfd97"
-  # umamiId  = "<script defer src="https://umami-6nu6gawdd-borderlineverstehens-projects.vercel.app/script.js" data-website-id="0bf7577d-e000-4c38-ac4e-5a481d4bfd97"></script>"
-
+    umamiSrc = "https://umami-6nu6gawdd-borderlineverstehens-projects.vercel.app/script.js"
+  umamiId  = "0bf7577d-e000-4c38-ac4e-5a481d4bfd97"
+  
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
