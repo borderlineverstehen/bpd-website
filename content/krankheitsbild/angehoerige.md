@@ -1,10 +1,10 @@
 ---
-title: "Für Angehörige"
-description: "Wie du nahestehende Menschen mit BPD unterstützen kannst — ohne dich selbst zu verlieren."
-chip: "Angehörige"
+title: Für Angehörige
+description: Wie du nahestehende Menschen mit BPD unterstützen kannst — ohne
+  dich selbst zu verlieren.
+chip: Angehörige
 weight: 3
 ---
-
 ## Eine Beziehung, die fordert
 
 Jemanden zu lieben, der mit BPD lebt, kann bedeuten: intensive Nähe und plötzliche Distanz, tiefe Verbundenheit und unerwartete Konflikte, das Gefühl nie genug zu tun und gleichzeitig zu viel zu sein.
@@ -20,16 +20,18 @@ Das bedeutet nicht, alles hinnehmen zu müssen. Aber Verständnis für den Hinte
 ## Was hilft — und was nicht
 
 **Hilfreich:**
-- Ruhig und klar kommunizieren, besonders in aufgeladenen Momenten
-- Grenzen setzen — konsequent, aber ohne Bestrafung
-- Die Gefühle der betroffenen Person ernst nehmen, ohne sie zu verstärken
-- Sich über die Erkrankung informieren (du tust es gerade)
+
+* Ruhig und klar kommunizieren, besonders in aufgeladenen Momenten
+* Grenzen setzen — konsequent, aber ohne Bestrafung
+* Die Gefühle der betroffenen Person ernst nehmen, ohne sie zu verstärken
+* Sich über die Erkrankung informieren (du tust es gerade)
 
 **Weniger hilfreich:**
-- Versuchen, alle Krisen zu lösen oder zu verhindern
-- Eigene Bedürfnisse dauerhaft zurückstellen
-- Ultimaten in emotional aufgeladenen Momenten stellen
-- Die Person auf ihre Diagnose reduzieren
+
+* Versuchen, alle Krisen zu lösen oder zu verhindern
+* Eigene Bedürfnisse dauerhaft zurückstellen
+* Ultimaten in emotional aufgeladenen Momenten stellen
+* Die Person auf ihre Diagnose reduzieren
 
 ## Auf dich selbst achten
 
