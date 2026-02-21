@@ -9,7 +9,7 @@ Jonas Reuther
 Pestalozzistraße 3  
 95369 Untersteinach
 
-**E-Mail:** [borderline-verstehen@gmail.com](mailto:borderline-verstehen@gmail.com)
+**E-Mail:** [borderlineverstehen@gmail.com](mailto:borderlineverstehen@gmail.com)
 
 ---
 
