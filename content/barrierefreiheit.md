@@ -21,4 +21,4 @@ Diese Website befindet sich im Aufbau. Einzelne Bereiche werden fortlaufend auf 
 
 ## Feedback
 
-Wenn du Barrieren auf dieser Website feststellst, freuen wir uns über eine Rückmeldung: [borderline-verstehen@gmail.com](mailto:borderline-verstehen@gmail.com)
+Wenn du Barrieren auf dieser Website feststellst, freuen wir uns über eine Rückmeldung: [borderlineverstehen@gmail.com](mailto:borderlineverstehen@gmail.com)

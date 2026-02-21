@@ -21,4 +21,4 @@ Bei akuten Krisen wende dich bitte an die [Telefonseelsorge](/ressourcen/) oder 
 
 BPD Verstehen ist werbefrei und unabhängig. Es gibt keine Kooperationen mit Pharmaunternehmen oder Kliniken. Alle Inhalte werden nach bestem Wissen erstellt und regelmäßig überprüft.
 
-Fehler, Verbesserungsvorschläge oder Feedback sind willkommen: [kontakt@bpd-verstehen.de](mailto:kontakt@bpd-verstehen.de)
+Fehler, Verbesserungsvorschläge oder Feedback sind willkommen: [borderlineverstehen@gmail.de](mailto:borderlineverstehen@gmail.de)
