@@ -1,11 +1,11 @@
-baseURL = "https://bpd-verstehen.de/"
+baseURL = "https://borderlineverstehen.de/"
 languageCode = "de-DE"
-title = "BPD Verstehen"
+title = "Borderline Verstehen"
 
 [params]
   description = "Informationen, Ressourcen und Gemeinschaft rund um Borderline-Persönlichkeitsstörung"
-  author = "BPD Verstehen"
-  email = "borderline-verstehen@gmail.com"
+  author = "Borderline Verstehen"
+  email = "borderlineverstehen@gmail.com"
   # Umami Analytics — nach Setup eintragen:
     umamiSrc = "https://umami-6nu6gawdd-borderlineverstehens-projects.vercel.app/script.js"
   umamiId  = "0bf7577d-e000-4c38-ac4e-5a481d4bfd97"
