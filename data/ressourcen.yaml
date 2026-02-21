@@ -16,16 +16,16 @@ ressourcen:
     kontakt: "0800 111 0 300"
     kostenlos: true
 
-  - name: "BPD Selbsthilfe Deutschland"
+  - name: "Borderline Plattform Deutschland"
     kategorie: selbsthilfe
     beschreibung: "Netzwerk von Selbsthilfegruppen für BPD-Betroffene und Angehörige."
-    url: "https://www.bpd-selbsthilfe.de"
+    url: "https://borderlineplattform.de"
     kostenlos: true
 
   - name: "Therapeutensuche (Kassenärztliche Bundesvereinigung)"
     kategorie: therapie
     beschreibung: "Offizielle Therapeuten-Datenbank mit Filterfunktion nach Therapieform."
-    url: "https://www.kvb.de/patienten/arzt-und-psychotherapeutensuche/"
+    url: "https://arztsuche.116117.de"
     kostenlos: true
 
   - name: "AWMF Leitlinie BPS"
