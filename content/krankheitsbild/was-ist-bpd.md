@@ -1,5 +1,5 @@
 ---
-title: "Was ist Borderline-Persönlichkeitsstörung?"
+title: "Was ist BPD?"
 description: "Eine Einführung in BPD: Symptome, Diagnosekriterien nach ICD-11 und was die Erkrankung für Betroffene bedeutet."
 chip: "Grundlagen"
 weight: 1
