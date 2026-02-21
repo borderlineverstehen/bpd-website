@@ -9,7 +9,7 @@ title = "BPD Verstehen"
   # Umami Analytics — nach Setup eintragen:
     umamiSrc = "https://umami-6nu6gawdd-borderlineverstehens-projects.vercel.app/script.js"
   umamiId  = "0bf7577d-e000-4c38-ac4e-5a481d4bfd97"
-  
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
@@ -32,6 +32,10 @@ title = "BPD Verstehen"
     name = "Community"
     url = "/community/"
     weight = 4
+  [[menu.main]]
+    name = "Notfallkoffer"
+    url = "/notfallkoffer/"
+    weight = 5
 
 [outputs]
   home = ["HTML", "RSS"]

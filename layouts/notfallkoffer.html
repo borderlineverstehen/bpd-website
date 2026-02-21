@@ -1,0 +1,624 @@
+{{ define "main" }}
+
+<style>
+  /* ── Notfallkoffer Variables ─────────────────────── */
+  :root {
+    --nk-bg:       #f8f7f4;
+    --nk-surface:  #ffffff;
+    --nk-teal:     #0d9488;
+    --nk-teal-lt:  #ccfbf1;
+    --nk-amber:    #f59e0b;
+    --nk-amber-lt: #fef3c7;
+    --nk-rose:     #e11d48;
+    --nk-rose-lt:  #ffe4e6;
+    --nk-text:     #1c1917;
+    --nk-muted:    #78716c;
+  }
+
+  /* ── Kategorie-Karten ────────────────────────────── */
+  .nk-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .nk-card {
+    background: var(--nk-surface);
+    border: 1.5px solid #e7e5e4;
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: box-shadow 0.2s, transform 0.15s, border-color 0.2s;
+    text-align: left;
+    width: 100%;
+  }
+  .nk-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+  .nk-card.teal  { border-color: var(--nk-teal); }
+  .nk-card.amber { border-color: var(--nk-amber); }
+  .nk-card.rose  { border-color: var(--nk-rose); }
+  .nk-card.violet { border-color: #7c3aed; }
+
+  .nk-card-icon {
+    width: 2.5rem; height: 2.5rem;
+    border-radius: 0.75rem;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+  .nk-card-icon.teal   { background: var(--nk-teal-lt); }
+  .nk-card-icon.amber  { background: var(--nk-amber-lt); }
+  .nk-card-icon.rose   { background: var(--nk-rose-lt); }
+  .nk-card-icon.violet { background: #ede9fe; }
+
+  .nk-card h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--nk-text);
+    margin: 0 0 0.25rem;
+  }
+  .nk-card p {
+    font-size: 0.875rem;
+    color: var(--nk-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* ── Modal ───────────────────────────────────────── */
+  .nk-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(28,25,23,0.5);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .nk-overlay.open { display: flex; }
+
+  .nk-modal {
+    background: var(--nk-surface);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    max-width: 560px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalIn 0.25s ease-out both;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.95) translateY(10px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .nk-close {
+    position: absolute; top: 1rem; right: 1rem;
+    background: #f5f5f4; border: none;
+    width: 2rem; height: 2rem;
+    border-radius: 50%;
+    cursor: pointer; font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--nk-muted);
+    transition: background 0.15s;
+  }
+  .nk-close:hover { background: #e7e5e4; }
+
+  .nk-modal h2 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 1.5rem;
+    padding-right: 2rem;
+  }
+
+  /* ── Übungs-Steps ────────────────────────────────── */
+  .nk-steps { display: flex; flex-direction: column; gap: 0.75rem; }
+
+  .nk-step {
+    background: var(--nk-bg);
+    border-radius: 1rem;
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--nk-text);
+    border-left: 3px solid transparent;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .nk-step.active {
+    background: var(--nk-teal-lt);
+    border-left-color: var(--nk-teal);
+  }
+  .nk-step strong { display: block; font-weight: 600; margin-bottom: 0.25rem; }
+
+  /* ── Atemkreis ───────────────────────────────────── */
+  .nk-breath-container {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 1.5rem;
+    padding: 1rem 0;
+  }
+  .nk-breath-circle {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--nk-teal-lt), #99f6e4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; font-weight: 600; color: var(--nk-teal);
+    transition: transform 0.1s;
+  }
+  .nk-breath-circle.inhale {
+    animation: breatheIn 4s ease-in-out forwards;
+  }
+  .nk-breath-circle.hold {
+    transform: scale(1.4);
+  }
+  .nk-breath-circle.exhale {
+    animation: breatheOut 6s ease-in-out forwards;
+  }
+  @keyframes breatheIn {
+    from { transform: scale(1); }
+    to   { transform: scale(1.4); }
+  }
+  @keyframes breatheOut {
+    from { transform: scale(1.4); }
+    to   { transform: scale(1); }
+  }
+
+  .nk-breath-label {
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--nk-teal); text-align: center;
+  }
+  .nk-breath-count {
+    font-size: 0.875rem; color: var(--nk-muted);
+  }
+
+  /* ── Buttons ─────────────────────────────────────── */
+  .nk-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.875rem;
+    font-weight: 600; font-size: 0.9rem;
+    cursor: pointer; border: none;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .nk-btn:active { transform: scale(0.97); }
+  .nk-btn.primary {
+    background: var(--nk-teal); color: white;
+  }
+  .nk-btn.primary:hover { background: #0f766e; }
+  .nk-btn.secondary {
+    background: #f5f5f4; color: var(--nk-text);
+  }
+  .nk-btn.secondary:hover { background: #e7e5e4; }
+
+  .nk-btn-row {
+    display: flex; gap: 0.75rem; flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+
+  /* ── Ablenkungskarten ────────────────────────────── */
+  .nk-distraction-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+  .nk-distraction-item {
+    background: var(--nk-bg);
+    border-radius: 0.875rem;
+    padding: 0.875rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--nk-text);
+    display: flex; align-items: flex-start; gap: 0.5rem;
+  }
+  .nk-distraction-item span:first-child { font-size: 1.2rem; flex-shrink: 0; }
+
+  /* ── Krisenhinweis ───────────────────────────────── */
+  .nk-crisis {
+    background: var(--nk-amber-lt);
+    border: 1px solid #fde68a;
+    border-radius: 1rem;
+    padding: 1rem 1.25rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  .nk-crisis a { color: #92400e; font-weight: 600; }
+</style>
+
+<section class="section-pad">
+  <div class="container-md">
+
+    <!-- Header -->
+    <div class="mb-10">
+      <span class="chip mb-4 inline-block">Interaktives Tool</span>
+      <h1 class="text-4xl sm:text-5xl font-serif text-stone-900">DBT-Notfallkoffer</h1>
+      <p class="mt-4 text-lg text-stone-500 max-w-xl">
+        Übungen aus der Dialektisch-Behavioralen Therapie für schwierige Momente.
+        Kein Account, keine Daten — alles läuft direkt in deinem Browser.
+      </p>
+    </div>
+
+    <!-- Krisenhinweis -->
+    <div class="nk-crisis">
+      <strong>Bei akuter Gefahr:</strong> Dieser Notfallkoffer ersetzt keine professionelle Hilfe.
+      Wenn du in einer akuten Krise bist, ruf bitte die
+      <a href="tel:08001110111">Telefonseelsorge 0800 111 0 111</a> an — kostenlos, anonym, 24/7.
+    </div>
+
+    <!-- Kategorie-Auswahl -->
+    <div class="nk-grid">
+
+      <!-- TIPP -->
+      <button class="nk-card teal" onclick="openModal('tipp')">
+        <div class="nk-card-icon teal">🌡️</div>
+        <h3>TIPP-Skills</h3>
+        <p>Schnelle körperliche Techniken um intensive Emotionen zu regulieren.</p>
+      </button>
+
+      <!-- Atemübung -->
+      <button class="nk-card teal" onclick="openModal('atem')">
+        <div class="nk-card-icon teal">🫁</div>
+        <h3>Atemübung</h3>
+        <p>Geführte Atemübung zur sofortigen Beruhigung des Nervensystems.</p>
+      </button>
+
+      <!-- Ablenkung -->
+      <button class="nk-card amber" onclick="openModal('ablenkung')">
+        <div class="nk-card-icon amber">🎯</div>
+        <h3>Ablenkungsstrategien</h3>
+        <p>Konkrete Ideen um den Fokus kurzfristig aus der Krise zu lenken.</p>
+      </button>
+
+      <!-- Selbstfürsorge -->
+      <button class="nk-card violet" onclick="openModal('selbst')">
+        <div class="nk-card-icon violet">💜</div>
+        <h3>Selbstfürsorge</h3>
+        <p>Erinnerungen und Übungen für einen fürsorglichen Umgang mit dir selbst.</p>
+      </button>
+
+      <!-- Erdungsübung -->
+      <button class="nk-card rose" onclick="openModal('erdung')">
+        <div class="nk-card-icon rose">🌿</div>
+        <h3>Erdungsübung 5-4-3-2-1</h3>
+        <p>Komm zurück in den gegenwärtigen Moment mit dieser Sinnesübung.</p>
+      </button>
+
+      <!-- Gedanken -->
+      <button class="nk-card amber" onclick="openModal('gedanken')">
+        <div class="nk-card-icon amber">🧠</div>
+        <h3>Gedanken beobachten</h3>
+        <p>Distanziere dich von belastenden Gedanken ohne sie zu bekämpfen.</p>
+      </button>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── MODALS ──────────────────────────────────────── -->
+
+<!-- TIPP -->
+<div class="nk-overlay" id="modal-tipp">
+  <div class="nk-modal">
+    <button class="nk-close" onclick="closeModal('tipp')">✕</button>
+    <h2>🌡️ TIPP-Skills</h2>
+    <p style="color: var(--nk-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+      TIPP steht für Temperatur, Intensive Bewegung, Paced Breathing und Progressive Relaxation.
+      Diese körperlichen Techniken wirken schnell auf das Nervensystem.
+    </p>
+    <div class="nk-steps">
+      <div class="nk-step">
+        <strong>T — Temperatur</strong>
+        Tauche dein Gesicht in kaltes Wasser (10–15°C) für 30 Sekunden, oder halte Eiswürfel in den Händen. Das aktiviert den Tauchreflex und verlangsamt den Herzschlag sofort.
+      </div>
+      <div class="nk-step">
+        <strong>I — Intensive Bewegung</strong>
+        Bewege dich 20 Minuten intensiv — laufen, Treppen steigen, Liegestütze. Intensive Bewegung baut Stresshormone ab und reguliert das Nervensystem.
+      </div>
+      <div class="nk-step">
+        <strong>P — Paced Breathing</strong>
+        Atme langsam und kontrolliert: 4 Sekunden ein, 6 Sekunden aus. Die verlängerte Ausatmung aktiviert das parasympathische Nervensystem.
+      </div>
+      <div class="nk-step">
+        <strong>P — Progressive Relaxation</strong>
+        Spanne nacheinander alle Muskelgruppen kurz an und lass sie los — beginnend bei den Füßen bis zum Gesicht. Das löst körperliche Anspannung.
+      </div>
+    </div>
+    <div class="nk-btn-row">
+      <button class="nk-btn secondary" onclick="closeModal('tipp')">Schließen</button>
+    </div>
+  </div>
+</div>
+
+<!-- ATEM -->
+<div class="nk-overlay" id="modal-atem">
+  <div class="nk-modal">
+    <button class="nk-close" onclick="closeModal('atem')">✕</button>
+    <h2>🫁 Atemübung</h2>
+    <p style="color: var(--nk-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+      4-7-8 Atemübung — eine der wirksamsten Techniken zur schnellen Beruhigung.
+      Mache 4 Runden für spürbare Wirkung.
+    </p>
+    <div class="nk-breath-container">
+      <div class="nk-breath-circle" id="breath-circle">Start</div>
+      <div class="nk-breath-label" id="breath-label">Bereit?</div>
+      <div class="nk-breath-count" id="breath-count">Runde <span id="breath-round">0</span> von 4</div>
+    </div>
+    <div class="nk-btn-row">
+      <button class="nk-btn primary" id="breath-btn" onclick="startBreathing()">Übung starten</button>
+      <button class="nk-btn secondary" onclick="closeModal('atem'); resetBreathing()">Schließen</button>
+    </div>
+  </div>
+</div>
+
+<!-- ABLENKUNG -->
+<div class="nk-overlay" id="modal-ablenkung">
+  <div class="nk-modal">
+    <button class="nk-close" onclick="closeModal('ablenkung')">✕</button>
+    <h2>🎯 Ablenkungsstrategien</h2>
+    <p style="color: var(--nk-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+      Ablenkung ist in einer Krise keine Schwäche — sie gibt dir Zeit bis die Intensität nachlässt.
+      Wähle was gerade möglich ist.
+    </p>
+    <div class="nk-distraction-grid">
+      <div class="nk-distraction-item"><span>🧊</span><span>Eiswürfel in der Hand halten und die Kälte spüren</span></div>
+      <div class="nk-distraction-item"><span>🎵</span><span>Laute Musik hören und mitsingen oder mitbewegen</span></div>
+      <div class="nk-distraction-item"><span>📱</span><span>Ein Video schauen das dich zum Lachen bringt</span></div>
+      <div class="nk-distraction-item"><span>✍️</span><span>Alles was dich gerade beschäftigt aufschreiben</span></div>
+      <div class="nk-distraction-item"><span>🚶</span><span>Rausgehen und einen kurzen Spaziergang machen</span></div>
+      <div class="nk-distraction-item"><span>🧩</span><span>Ein einfaches Spiel spielen das Konzentration erfordert</span></div>
+      <div class="nk-distraction-item"><span>🍵</span><span>Einen heißen Tee kochen und langsam trinken</span></div>
+      <div class="nk-distraction-item"><span>🐾</span><span>Ein Tier streicheln oder Tiervideos anschauen</span></div>
+    </div>
+    <div class="nk-btn-row">
+      <button class="nk-btn secondary" onclick="closeModal('ablenkung')">Schließen</button>
+    </div>
+  </div>
+</div>
+
+<!-- SELBSTFÜRSORGE -->
+<div class="nk-overlay" id="modal-selbst">
+  <div class="nk-modal">
+    <button class="nk-close" onclick="closeModal('selbst')">✕</button>
+    <h2>💜 Selbstfürsorge</h2>
+    <p style="color: var(--nk-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+      Lies diese Sätze langsam durch — auch wenn sie sich gerade nicht wahr anfühlen.
+    </p>
+    <div class="nk-steps" id="selbst-steps">
+      <div class="nk-step">Dieser Moment geht vorbei. Er fühlt sich permanent an, aber das ist er nicht.</div>
+      <div class="nk-step">Es ist okay, gerade nicht okay zu sein.</div>
+      <div class="nk-step">Du hast schon schwierige Momente überlebt — auch diesen wirst du überstehen.</div>
+      <div class="nk-step">Deine Gefühle sind real und verständlich. Du musst sie nicht rechtfertigen.</div>
+      <div class="nk-step">Du verdienst Fürsorge — auch von dir selbst.</div>
+      <div class="nk-step">Was brauchst du gerade? Wärme, Stille, Bewegung, jemanden zum Reden?</div>
+    </div>
+    <div class="nk-btn-row">
+      <button class="nk-btn secondary" onclick="closeModal('selbst')">Schließen</button>
+    </div>
+  </div>
+</div>
+
+<!-- ERDUNG -->
+<div class="nk-overlay" id="modal-erdung">
+  <div class="nk-modal">
+    <button class="nk-close" onclick="closeModal('erdung')">✕</button>
+    <h2>🌿 Erdungsübung 5-4-3-2-1</h2>
+    <p style="color: var(--nk-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+      Diese Übung bringt dich zurück in den gegenwärtigen Moment.
+      Nimm dir für jeden Schritt wirklich Zeit.
+    </p>
+    <div class="nk-steps" id="erdung-steps">
+      <div class="nk-step active">
+        <strong>5 Dinge die du siehst</strong>
+        Schau dich um. Benenne 5 Dinge die du gerade sehen kannst — so konkret wie möglich.
+      </div>
+      <div class="nk-step">
+        <strong>4 Dinge die du fühlst</strong>
+        Was spürst du körperlich? Den Stuhl unter dir, deine Kleidung, die Temperatur der Luft.
+      </div>
+      <div class="nk-step">
+        <strong>3 Dinge die du hörst</strong>
+        Schließe kurz die Augen. Was nimmst du wahr? Auch leise Hintergrundgeräusche zählen.
+      </div>
+      <div class="nk-step">
+        <strong>2 Dinge die du riechst</strong>
+        Atme bewusst ein. Was riechst du — oder erinnerst du dich an einen angenehmen Geruch?
+      </div>
+      <div class="nk-step">
+        <strong>1 Ding das du schmeckst</strong>
+        Wie schmeckt dein Mund gerade? Oder nimm einen Schluck Wasser und konzentriere dich darauf.
+      </div>
+    </div>
+    <div class="nk-btn-row">
+      <button class="nk-btn primary" onclick="nextErdungStep()">Weiter →</button>
+      <button class="nk-btn secondary" onclick="closeModal('erdung'); resetErdung()">Schließen</button>
+    </div>
+  </div>
+</div>
+
+<!-- GEDANKEN -->
+<div class="nk-overlay" id="modal-gedanken">
+  <div class="nk-modal">
+    <button class="nk-close" onclick="closeModal('gedanken')">✕</button>
+    <h2>🧠 Gedanken beobachten</h2>
+    <p style="color: var(--nk-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+      Gedanken sind keine Fakten. Diese Übung hilft dir, Abstand zu gewinnen — ohne die Gedanken zu bekämpfen.
+    </p>
+    <div class="nk-steps">
+      <div class="nk-step">
+        <strong>Schritt 1 — Beobachte</strong>
+        Nimm wahr welche Gedanken gerade da sind. Kein Urteilen, kein Kämpfen — nur beobachten.
+      </div>
+      <div class="nk-step">
+        <strong>Schritt 2 — Benenne</strong>
+        Sag innerlich: „Ich bemerke den Gedanken, dass..." Das schafft Abstand zwischen dir und dem Gedanken.
+      </div>
+      <div class="nk-step">
+        <strong>Schritt 3 — Lass ihn ziehen</strong>
+        Stell dir vor der Gedanke sitzt auf einem Blatt das einen Fluss hinuntertreibt. Du schaust zu — du bist nicht das Blatt.
+      </div>
+      <div class="nk-step">
+        <strong>Schritt 4 — Kehre zurück</strong>
+        Immer wenn du merkst du bist dem Gedanken gefolgt: kein Urteil. Bring die Aufmerksamkeit sanft zurück zum Beobachten.
+      </div>
+    </div>
+    <div class="nk-btn-row">
+      <button class="nk-btn secondary" onclick="closeModal('gedanken')">Schließen</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Modal ──────────────────────────────────────────
+  function openModal(id) {
+    document.getElementById('modal-' + id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById('modal-' + id).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Overlay klick schließt Modal
+  document.querySelectorAll('.nk-overlay').forEach(overlay => {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.classList.remove('open');
+        document.body.style.overflow = '';
+        resetBreathing();
+        resetErdung();
+      }
+    });
+  });
+
+  // ── Atemübung ──────────────────────────────────────
+  let breathRound = 0;
+  let breathTimer = null;
+  let breathRunning = false;
+
+  function startBreathing() {
+    if (breathRunning) return;
+    breathRunning = true;
+    breathRound = 0;
+    document.getElementById('breath-btn').disabled = true;
+    document.getElementById('breath-btn').textContent = 'Läuft…';
+    nextBreathCycle();
+  }
+
+  function nextBreathCycle() {
+    if (breathRound >= 4) {
+      document.getElementById('breath-label').textContent = 'Gut gemacht 💜';
+      document.getElementById('breath-circle').textContent = '✓';
+      document.getElementById('breath-circle').className = 'nk-breath-circle';
+      document.getElementById('breath-btn').disabled = false;
+      document.getElementById('breath-btn').textContent = 'Nochmal';
+      breathRunning = false;
+      return;
+    }
+
+    breathRound++;
+    document.getElementById('breath-round').textContent = breathRound;
+
+    const circle = document.getElementById('breath-circle');
+    const label  = document.getElementById('breath-label');
+
+    // Einatmen — 4s
+    circle.className = 'nk-breath-circle inhale';
+    circle.textContent = '4';
+    label.textContent = 'Einatmen…';
+
+    let count = 4;
+    const countDown = setInterval(() => {
+      count--;
+      if (count > 0) circle.textContent = count;
+    }, 1000);
+
+    setTimeout(() => {
+      clearInterval(countDown);
+      // Halten — 7s
+      circle.className = 'nk-breath-circle hold';
+      circle.textContent = '7';
+      label.textContent = 'Halten…';
+
+      let holdCount = 7;
+      const holdDown = setInterval(() => {
+        holdCount--;
+        if (holdCount > 0) circle.textContent = holdCount;
+      }, 1000);
+
+      setTimeout(() => {
+        clearInterval(holdDown);
+        // Ausatmen — 8s
+        circle.className = 'nk-breath-circle exhale';
+        circle.textContent = '8';
+        label.textContent = 'Ausatmen…';
+
+        let outCount = 8;
+        const outDown = setInterval(() => {
+          outCount--;
+          if (outCount > 0) circle.textContent = outCount;
+        }, 1000);
+
+        setTimeout(() => {
+          clearInterval(outDown);
+          nextBreathCycle();
+        }, 8000);
+
+      }, 7000);
+    }, 4000);
+  }
+
+  function resetBreathing() {
+    breathRunning = false;
+    breathRound = 0;
+    clearTimeout(breathTimer);
+    const circle = document.getElementById('breath-circle');
+    if (circle) {
+      circle.className = 'nk-breath-circle';
+      circle.textContent = 'Start';
+    }
+    const label = document.getElementById('breath-label');
+    if (label) label.textContent = 'Bereit?';
+    const round = document.getElementById('breath-round');
+    if (round) round.textContent = '0';
+    const btn = document.getElementById('breath-btn');
+    if (btn) { btn.disabled = false; btn.textContent = 'Übung starten'; }
+  }
+
+  // ── Erdungsübung ───────────────────────────────────
+  let erdungStep = 0;
+
+  function nextErdungStep() {
+    const steps = document.querySelectorAll('#erdung-steps .nk-step');
+    if (erdungStep < steps.length) {
+      steps[erdungStep].classList.remove('active');
+    }
+    erdungStep++;
+    if (erdungStep < steps.length) {
+      steps[erdungStep].classList.add('active');
+      steps[erdungStep].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    if (erdungStep >= steps.length - 1) {
+      document.querySelector('#modal-erdung .nk-btn.primary').textContent = 'Fertig ✓';
+      document.querySelector('#modal-erdung .nk-btn.primary').onclick = function() {
+        closeModal('erdung');
+        resetErdung();
+      };
+    }
+  }
+
+  function resetErdung() {
+    erdungStep = 0;
+    const steps = document.querySelectorAll('#erdung-steps .nk-step');
+    steps.forEach((s, i) => {
+      s.classList.toggle('active', i === 0);
+    });
+    const btn = document.querySelector('#modal-erdung .nk-btn.primary');
+    if (btn) { btn.textContent = 'Weiter →'; btn.onclick = nextErdungStep; }
+  }
+</script>
+
+{{ end }}
