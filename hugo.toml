@@ -29,13 +29,9 @@ title = "BPD Verstehen"
     url = "/ressourcen/"
     weight = 3
   [[menu.main]]
-    name = "Community"
-    url = "/community/"
-    weight = 4
-  [[menu.main]]
     name = "Notfallkoffer"
     url = "/notfallkoffer/"
-    weight = 5
+    weight = 4
 
 [outputs]
   home = ["HTML", "RSS"]
