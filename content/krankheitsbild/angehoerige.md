@@ -1,5 +1,5 @@
 ---
-title: Für Angehörige & Betroffene
+title: Für Angehörige
 description: Wie du nahestehende Menschen mit BPD unterstützen kannst — ohne
   dich selbst zu verlieren.
 chip: Angehörige
